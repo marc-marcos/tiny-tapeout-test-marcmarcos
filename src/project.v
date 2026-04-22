@@ -27,6 +27,7 @@ module tt_um_example (
         end
         // Read operation (Synchronous)
         uo_out_s <= ram[uio_in[4:0]];
+
     end
   // All output pins must be assigned. If not used, assign to 0.
   assign uio_out = 0;

@@ -16,13 +16,26 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+  reg [7:0] ram [0:127];
+   reg [7:0] uo_out_s;
+
+
+  always @(posedge clk) begin
+        if (uio_in[7]) begin
+            // Write operation
+            ram[uio_in[6:0]] <= ui_in;
+        end
+        // Read operation (Synchronous)
+        uo_out_s <= ram[uio_in[6:0]];
+    end
   // All output pins must be assigned. If not used, assign to 0.
   assign uio_out = 0;
   assign uio_oe  = 0;
 
-   assign uo_out = {{7{1'b0}}, (ui_in[0] ^ ui_in[1]) ^ (ui_in[2] ^ ui_in[3]) };
+
+   assign uo_out = uo_out_s;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0, ui_in[7:4], uio_in};
+  wire _unused = &{ena, clk, rst_n, 1'b0};
 
 endmodule

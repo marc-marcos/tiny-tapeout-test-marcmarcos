@@ -23,10 +23,10 @@ module tt_um_example (
   always @(posedge clk) begin
         if (uio_in[7]) begin
             // Write operation
-            ram[uio_in[6:0]] <= ui_in;
+            ram[uio_in[4:0]] <= ui_in;
         end
         // Read operation (Synchronous)
-        uo_out_s <= ram[uio_in[6:0]];
+        uo_out_s <= ram[uio_in[4:0]];
     end
   // All output pins must be assigned. If not used, assign to 0.
   assign uio_out = 0;
@@ -36,6 +36,6 @@ module tt_um_example (
    assign uo_out = uo_out_s;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+  wire _unused = &{ena, clk, rst_n, uio_in[6:5], 1'b0};
 
 endmodule

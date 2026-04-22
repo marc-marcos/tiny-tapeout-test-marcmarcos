@@ -16,7 +16,7 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  reg [7:0] ram [0:127];
+  reg [7:0] ram [0:31];
    reg [7:0] uo_out_s;
 
 
